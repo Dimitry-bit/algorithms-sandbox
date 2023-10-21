@@ -9,7 +9,7 @@ public class StackResizingArray<Item> implements Iterable<Item> {
     private Item[] items;
     private int N;
 
-    private StackResizingArray() {
+    public StackResizingArray() {
         items = (Item[]) new Object[1];
         N = 0;
     }
