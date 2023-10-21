@@ -1,3 +1,6 @@
+/* Write a filter InfixToPostfix that converts an arithmetic expression from in-
+fix to postfix. */
+
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.StringTokenizer;

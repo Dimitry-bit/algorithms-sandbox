@@ -1,22 +1,21 @@
+/* Add a method peek() to Stack that returns the most recently inserted item on
+the stack (without popping it). */
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class StackLinkedList<Item> implements Iterable<Item> {
-    private Node head;
+public class StackResizingArray<Item> implements Iterable<Item> {
+
+    private Item[] items;
     private int N;
 
-    private class Node {
-        Item value;
-        Node next;
-    }
-
-    public StackLinkedList() {
-        head = null;
+    private StackResizingArray() {
+        items = (Item[]) new Object[1];
         N = 0;
     }
 
     public boolean isEmpty() {
-        return (head == null);
+        return (N == 0);
     }
 
     public int size() {
@@ -24,11 +23,10 @@ public class StackLinkedList<Item> implements Iterable<Item> {
     }
 
     public void push(Item item) {
-        Node node = new Node();
-        node.next = head;
-        node.value = item;
-        head = node;
-        N++;
+        if (N == items.length) {
+            resize(2 * items.length);
+        }
+        items[N++] = item;
     }
 
     public Item pop() {
@@ -36,9 +34,11 @@ public class StackLinkedList<Item> implements Iterable<Item> {
             throw new NoSuchElementException("Stack size is 0");
         }
 
-        Item item = head.value;
-        head = head.next;
-        N--;
+        Item item = items[--N];
+        items[N] = null;
+        if (!isEmpty() && N == items.length / 4) {
+            resize(items.length / 2);
+        }
         return item;
     }
 
@@ -47,40 +47,45 @@ public class StackLinkedList<Item> implements Iterable<Item> {
             throw new NoSuchElementException("Stack size is 0");
         }
 
-        return head.value;
+        return items[N - 1];
+    }
+
+    private void resize(int max) {
+        Item[] tmp = (Item[]) new Object[max];
+        System.arraycopy(items, 0, tmp, 0, N);
+        items = tmp;
     }
 
     public Iterator<Item> iterator() {
-        return new LinkedListIterator();
+        return new ReverseArrayIterator();
     }
 
-    private class LinkedListIterator implements Iterator<Item> {
-        private Node current = head;
+    private class ReverseArrayIterator implements Iterator<Item> {
+
+        private int i = N;
 
         public boolean hasNext() {
-            return (current != null);
+            return (i > 0);
         }
 
         public Item next() {
-            Item item = current.value;
-            current = current.next;
-            return item;
+            return items[--i];
         }
 
         public void remove() {
-            throw new UnsupportedOperationException("Remove in loops is not supported!");
+            throw new UnsupportedOperationException();
         }
     }
 
     public static void main(String[] args) {
-        StackLinkedList<Integer> stack = new StackLinkedList<>();
+        StackResizingArray<Integer> stack = new StackResizingArray<>();
 
         assert (stack.isEmpty());
         assert (stack.size() == 0);
+
         stack.push(3);
         stack.push(4);
         stack.push(5);
-
         for (Integer n : stack) {
             System.out.println(n);
         }
@@ -91,7 +96,6 @@ public class StackLinkedList<Item> implements Iterable<Item> {
         assert (pop == 5);
         stack.pop();
         stack.pop();
-
         stack.pop(); // throw exception
     }
 }

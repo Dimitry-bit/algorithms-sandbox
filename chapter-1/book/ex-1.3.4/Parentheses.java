@@ -1,3 +1,7 @@
+/* Write a stack client Parentheses that reads in a text stream from standard input
+and uses a stack to determine whether its parentheses are properly balanced. For ex-
+ample, your program should print true for [()]{}{[()()]()} and false for [(]). */
+
 import java.io.InputStream;
 import java.util.Scanner;
 
