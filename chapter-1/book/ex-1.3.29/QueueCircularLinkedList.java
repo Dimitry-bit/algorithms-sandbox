@@ -1,3 +1,7 @@
+/* 1.3.29 Write a Queue implementation that uses a circular linked list, which is the same
+as a linked list except that no links are null and the value of last.next is first when-
+ever the list is not empty. Keep only one Node instance variable (last). */
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -21,19 +25,16 @@ public class QueueCircularLinkedList<Item> implements Iterable<Item> {
     public void enqueue(Item item) {
         Node node = new Node();
         node.value = item;
-        
-        if (tail == null)
-        {
+
+        if (tail == null) {
             tail = node;
             tail.next = node;
-        }
-        else 
-        {
+        } else {
             node.next = tail.next;
             tail.next = node;
             tail = node;
         }
-        
+
         N++;
     }
 
@@ -96,8 +97,7 @@ public class QueueCircularLinkedList<Item> implements Iterable<Item> {
         for (int i = 0; i < args.length; ++i) {
             if (args[i].equals("-")) {
                 System.out.print(q.dequeue() + ' ');
-            }
-            else {
+            } else {
                 q.enqueue(args[i]);
             }
         }
