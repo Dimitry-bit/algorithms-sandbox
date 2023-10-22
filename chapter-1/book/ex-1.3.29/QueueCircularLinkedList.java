@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class QueueCircularLinkedList<Item> implements Iterable<Item> {
-    Node tail;
-    int N;
+    private Node tail;
+    private int N;
 
     public QueueCircularLinkedList() {
         tail = null;

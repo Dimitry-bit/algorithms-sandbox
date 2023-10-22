@@ -22,9 +22,9 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
         Node next;
     }
 
-    Node head;
-    Node tail;
-    int N;
+    private Node head;
+    private Node tail;
+    private int N;
 
     public LinkedList() {
         head = null;
