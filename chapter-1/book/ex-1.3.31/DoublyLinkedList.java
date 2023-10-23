@@ -8,16 +8,18 @@ node. */
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import prj.utils.Utils;
+
 public class DoublyLinkedList<Item> implements Iterable<Item> {
     private class DoubleNode {
-        Item value;
-        DoubleNode next;
-        DoubleNode prev;
+        private Item value;
+        private DoubleNode next;
+        private DoubleNode prev;
     }
 
-    DoubleNode head;
-    DoubleNode tail;
-    int N;
+    private DoubleNode head;
+    private DoubleNode tail;
+    private int N;
 
     public DoublyLinkedList() {
         head = tail = null;
@@ -29,20 +31,35 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
     }
 
     public boolean isEmpty() {
-        return (head == null);
+        return (N == 0);
     }
 
-    private DoubleNode getNodeAt(int index) {
-        if (index < 0 || index >= N) {
-            throw new IndexOutOfBoundsException("Invalid index " + index + ", size is " + N);
-        }
+    public void insertFront(Item item) {
+        DoubleNode oldHead = head;
+        head = new DoubleNode();
+        head.value = item;
+        head.next = oldHead;
 
-        DoubleNode p = head;
-        while (index-- > 0) {
-            p = p.next;
+        if (isEmpty()) {
+            tail = head;
+        } else {
+            oldHead.prev = head;
         }
+        N++;
+    }
 
-        return p;
+    public void insertBack(Item item) {
+        DoubleNode oldTail = tail;
+        tail = new DoubleNode();
+        tail.value = item;
+        tail.prev = oldTail;
+
+        if (isEmpty()) {
+            head = tail;
+        } else {
+            oldTail.next = tail;
+        }
+        N++;
     }
 
     public void insertBefore(Item item, int index) {
@@ -50,63 +67,41 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
             throw new IndexOutOfBoundsException("Invalid index " + index + ", size is " + N);
         }
 
-        DoubleNode node = new DoubleNode();
-        node.value = item;
+        if (index == 0) {
+            insertFront(item);
+        } else {
+            DoubleNode node = new DoubleNode();
+            DoubleNode p = getNode(index);
 
-        DoubleNode p = getNodeAt(index);
-        node.next = p;
-        node.prev = p.prev;
-        p.prev.next = node;
-        p.prev = node;
+            node.value = item;
+            node.next = p;
+            node.prev = p.prev;
+            p.prev.next = node;
+            p.prev = node;
 
-        N++;
+            N++;
+        }
     }
 
-    private void insertAfter(Item item, int index) {
+    public void insertAfter(Item item, int index) {
         if (index < 0 || index >= N) {
             throw new IndexOutOfBoundsException("Invalid index " + index + ", size is " + N);
         }
 
-        DoubleNode node = new DoubleNode();
-        node.value = item;
-
-        DoubleNode p = getNodeAt(index);
-        node.prev = p;
-        node.next = p.next;
-        p.next.prev = node;
-        p.next = node;
-
-        N++;
-    }
-
-    public void insertFront(Item item) {
-        DoubleNode node = new DoubleNode();
-        node.value = item;
-
-        if (head == null) {
-            head = tail = node;
+        if (index == N - 1) {
+            insertBack(item);
         } else {
-            head.prev = node;
-            node.next = head;
-            head = node;
+            DoubleNode node = new DoubleNode();
+            DoubleNode p = getNode(index);
+
+            node.value = item;
+            node.prev = p;
+            node.next = p.next;
+            p.next.prev = node;
+            p.next = node;
+
+            N++;
         }
-
-        N++;
-    }
-
-    public void insertBack(Item item) {
-        DoubleNode node = new DoubleNode();
-        node.value = item;
-
-        if (head == null) {
-            head = tail = node;
-        } else {
-            tail.next = node;
-            node.prev = tail;
-            tail = node;
-        }
-
-        N++;
     }
 
     public Item removeFront() {
@@ -121,8 +116,8 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         head = head.next;
         N--;
 
-        if (N == 0) {
-            tail = null;
+        if (isEmpty()) {
+            head = tail = null;
         }
 
         return item;
@@ -140,36 +135,63 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         tail = tail.prev;
         N--;
 
-        if (N == 0) {
-            head = null;
+        if (isEmpty()) {
+            head = tail = null;
         }
 
         return item;
     }
 
-    public void remove(Item item) {
+    public int remove(Item item) {
         if (isEmpty()) {
             throw new NoSuchElementException("DoublyLinkedList is empty");
         }
 
-        if (head.value.equals(item)) {
-            removeFront();
-            return;
-        } else if (tail.value.equals(item)) {
-            removeBack();
-            return;
+        int removeCount = 0;
+
+        while (head != null && head.value.equals(item)) {
+            if (head.next != null) {
+                head.next.prev = null;
+            }
+            head = head.next;
+            removeCount++;
         }
 
         DoubleNode p = head;
+        DoubleNode last = p;
         while (p != null) {
             if (p.value.equals(item)) {
                 p.prev.next = p.next;
-                p.next.prev = p.prev;
-                N--;
-                return;
+                if (p.next != null) {
+                    p.next.prev = p.prev;
+                }
+                removeCount++;
+            } else {
+                last = p;
             }
             p = p.next;
         }
+        tail = last;
+        N -= removeCount;
+
+        if (isEmpty()) {
+            head = tail = null;
+        }
+
+        return removeCount;
+    }
+
+    private DoubleNode getNode(int index) {
+        if (index < 0 || index >= N) {
+            throw new IndexOutOfBoundsException("Invalid index " + index + ", size is " + N);
+        }
+
+        DoubleNode p = head;
+        while (index-- > 0) {
+            p = p.next;
+        }
+
+        return p;
     }
 
     public Iterator<Item> iterator() {
@@ -198,43 +220,34 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         DoublyLinkedList<String> list = new DoublyLinkedList<>();
 
         list.insertFront("First");
-        printList(list);
+        Utils.printCollection(list);
 
         list.insertFront("Front");
-        printList(list);
+        Utils.printCollection(list);
 
         list.insertBack("Second");
-        printList(list);
+        Utils.printCollection(list);
 
         list.insertAfter("After(1)", 1);
-        printList(list);
+        Utils.printCollection(list);
 
         list.insertBefore("Before(1)", 1);
-        printList(list);
+        Utils.printCollection(list);
 
         System.out.println("\nRemove Tests:\n");
 
-        System.out.printf("Remove Front: '%s'\n", list.removeFront().toString());
-        printList(list);
+        System.out.printf("Remove Front: \"%s\"\n", list.removeFront().toString());
+        Utils.printCollection(list);
 
-        System.out.printf("Remove Back: '%s'\n", list.removeBack().toString());
-        printList(list);
+        System.out.printf("Remove Back: \"%s\"\n", list.removeBack().toString());
+        Utils.printCollection(list);
 
-        System.out.println("Remove 'First'");
+        System.out.println("Remove: \"First\"");
         list.remove("First");
-        printList(list);
+        Utils.printCollection(list);
 
         list.removeFront();
         list.removeFront();
-        printList(list);
-    }
-
-    public static <T> void printList(DoublyLinkedList<T> list) {
-        System.out.print("Out: ");
-        for (T s : list) {
-            System.out.printf("%s, ", s.toString());
-        }
-        System.out.printf("\n(Size=%d, IsEmpty=%s)", list.size(), (list.isEmpty()) ? "True" : "False");
-        System.out.println();
+        Utils.printCollection(list);
     }
 }
