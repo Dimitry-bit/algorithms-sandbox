@@ -181,6 +181,38 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         return removeCount;
     }
 
+    public Item removeAt(int index) {
+        if (index < 0 || index >= N) {
+            throw new IndexOutOfBoundsException("Invalid index " + index + ", size is " + N);
+        }
+
+        if (index == 0) {
+            return removeFront();
+        } else if (index == N - 1) {
+            return removeBack();
+        }
+
+        DoubleNode p = getNode(index);
+        p.next.prev = p.prev;
+        p.prev.next = p.next;
+        N--;
+
+        return p.value;
+    }
+
+    public int find(Item item) {
+        int index = -1;
+        int i = 0;
+        for (DoubleNode p = head; p != null; p = p.next, ++i) {
+            if (p.value.equals(item)) {
+                index = i;
+                break;
+            }
+        }
+
+        return index;
+    }
+
     private DoubleNode getNode(int index) {
         if (index < 0 || index >= N) {
             throw new IndexOutOfBoundsException("Invalid index " + index + ", size is " + N);
