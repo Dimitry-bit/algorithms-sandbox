@@ -16,10 +16,12 @@ positive integers, and return 0 if the list is empty. */
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import prj.utils.Utils;
+
 public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item> {
-    public class Node {
-        Item value;
-        Node next;
+    private class Node {
+        private Item value;
+        private Node next;
     }
 
     private Node head;
@@ -27,8 +29,7 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
     private int N;
 
     public LinkedList() {
-        head = null;
-        tail = null;
+        head = tail = null;
         N = 0;
     }
 
@@ -37,10 +38,26 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
     }
 
     public boolean isEmpty() {
-        return (head == null);
+        return (N == 0);
     }
 
     public void add(Item item) {
+        insertBack(item);
+    }
+
+    public void insertFront(Item item) {
+        Node oldHead = head;
+        head = new Node();
+        head.value = item;
+        head.next = oldHead;
+
+        if (isEmpty()) {
+            tail = head;
+        }
+        N++;
+    }
+
+    public void insertBack(Item item) {
         Node oldTail = tail;
         tail = new Node();
         tail.value = item;
@@ -51,11 +68,29 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
         } else {
             oldTail.next = tail;
         }
-
         N++;
     }
 
-    public Item remove() {
+    public void insertAt(Item item, int index) {
+        if (index < 0 || index > N) {
+            throw new IndexOutOfBoundsException("Invalid index " + index + ", size is " + N);
+        }
+
+        if (index == 0) {
+            insertFront(item);
+        } else if (index == N) {
+            insertBack(item);
+        } else {
+            Node p = getNode(index - 1);
+            Node node = new Node();
+            node.value = item;
+            node.next = p.next;
+            p.next = node;
+            N++;
+        }
+    }
+
+    public Item removeFront() {
         if (isEmpty()) {
             throw new NoSuchElementException("LinkedList is empty");
         }
@@ -63,6 +98,29 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
         Item item = head.value;
         head = head.next;
         N--;
+
+        if (isEmpty()) {
+            head = tail = null;
+        }
+
+        return item;
+    }
+
+    public Item removeBack() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("LinkedList is empty");
+        }
+
+        Item item = tail.value;
+        Node newLast = getNode(N - 1);
+        newLast.next = null;
+        tail = newLast;
+        N--;
+
+        if (isEmpty()) {
+            head = tail = null;
+        }
+
         return item;
     }
 
@@ -71,73 +129,65 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
             throw new IndexOutOfBoundsException("Invalid index " + index + ", size is " + N);
         }
 
-        N--;
-        Item item = head.value;
-        if (index == 0) {
-            head = head.next;
-        } else {
-            Node current = head;
-            while (--index > 0) {
-                current = current.next;
-            }
-            item = removeAfter(current);
-        }
-
-        return item;
-    }
-
-    private Item removeAfter(Node node) {
-        if (node == null) {
-            return null;
-        }
-
         Item item = null;
-        if (node.next != null) {
-            item = node.next.value;
-            node.next = (node.next.next != null) ? node.next.next : null;
+        if (index == 0) {
+            item = removeFront();
+        } else if (index == N - 1) {
+            item = removeBack();
+        } else {
+            Node p = getNode(index - 1);
+            item = p.next.value;
+            p.next = p.next.next;
+            N--;
         }
 
         return item;
     }
 
-    private int remove(Item item) {
-        int count = 0;
+    public int remove(Item item) {
+        if (isEmpty()) {
+            throw new NoSuchElementException("LinkedList is empty");
+        }
+
+        int removeCount = 0;
 
         while (head != null && head.value.equals(item)) {
             head = head.next;
-            count++;
+            removeCount++;
         }
 
         Node p = head;
-        while (p.next != null) {
-            if (p.next.value.equals(item)) {
-                p.next = p.next.next;
-                count++;
-            } else {
-                p = p.next;
+        if (p != null) {
+            while (p.next != null) {
+                if (p.next.value.equals(item)) {
+                    p.next = p.next.next;
+                    removeCount++;
+                } else {
+                    p = p.next;
+                }
             }
         }
+        tail = p;
+        N -= removeCount;
 
-        return count;
-    }
-
-    private void InsertAfter(Node a, Node b) {
-        if (a == null || b == null) {
-            return;
+        if (isEmpty()) {
+            head = tail = null;
         }
 
-        b.next = a.next;
-        a.next = b;
+        return removeCount;
     }
 
-    public boolean find(Item key) {
-        for (Node p = head; p != null; p = p.next) {
+    public int find(Item key) {
+        int index = -1;
+        int i = 0;
+        for (Node p = head; p != null; p = p.next, i++) {
             if (p.value.equals(key)) {
-                return true;
+                index = i;
+                break;
             }
         }
 
-        return false;
+        return index;
     }
 
     public Item max() {
@@ -172,6 +222,15 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
         return ((value.compareTo(p.value) > 0) ? value : p.value);
     }
 
+    private Node getNode(int index) {
+        Node p = head;
+        while (index-- > 0) {
+            p = p.next;
+        }
+
+        return p;
+    }
+
     public Iterator<Item> iterator() {
         return new LinkedListIterator();
     }
@@ -194,68 +253,44 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
         }
     }
 
-    public void TestInsert(Item item) {
-        Node testNode = new Node();
-        testNode.value = item;
-        this.InsertAfter(head, testNode);
-    }
-
     public static void main(String[] args) {
         LinkedList<Integer> list = new LinkedList<>();
 
-        list.add(40);
-        list.add(40);
-        list.add(40);
-        list.add(10);
-        list.add(20);
-        list.add(30);
-        list.add(40);
-        list.add(400);
-        list.add(40);
-        list.add(40);
+        list.insertFront(600);
+        list.insertBack(40);
+        list.insertBack(40);
+        list.insertBack(40);
+        list.insertBack(10);
+        list.insertBack(20);
+        list.insertBack(30);
+        list.insertBack(40);
+        list.insertBack(400);
+        list.insertBack(40);
+        list.insertBack(40);
 
-        list.TestInsert(100);
-
+        Utils.printCollection(list);
         System.out.printf("Max: %d\n", list.max());
         System.out.printf("Max Recursive: %d\n", list.maxRecursive());
 
-        System.out.print("out: ");
-        for (int n : list) {
-            System.out.printf("%d ", n);
-        }
-        System.out.println();
-
-        System.out.println("\nRemove index 3");
+        System.out.println("\nRemove(i=3):");
         list.removeAt(3);
-        System.out.print("out: ");
-        for (int n : list) {
-            System.out.printf("%d ", n);
-        }
-        System.out.println();
+        Utils.printCollection(list);
+        System.out.printf("Size: %d\nIsEmpty: %s\n", list.size(), list.isEmpty() ? "True" : "False");
 
-        System.out.println("\nRemove index 1");
+        System.out.println("\nRemove(i=1):");
         list.removeAt(1);
-        System.out.print("out: ");
-        for (int n : list) {
-            System.out.printf("%d ", n);
-        }
-        System.out.println();
+        Utils.printCollection(list);
+        System.out.printf("Size: %d\nIsEmpty: %s\n", list.size(), list.isEmpty() ? "True" : "False");
 
-        System.out.println("\nRemove index 0");
+        System.out.println("\nRemove(i=0):");
         list.removeAt(0);
-        System.out.print("out: ");
-        for (int n : list) {
-            System.out.printf("%d ", n);
-        }
-        System.out.println();
+        Utils.printCollection(list);
+        System.out.printf("Size: %d\nIsEmpty: %s\n", list.size(), list.isEmpty() ? "True" : "False");
 
-        System.out.println("\nRemove all value 40");
+        System.out.println("\nRemove(v=\"40\"):");
         int count = list.remove(40);
-        System.out.print("out: ");
-        for (int n : list) {
-            System.out.printf("%d ", n);
-        }
-        System.out.println();
+        Utils.printCollection(list);
         System.out.printf("Removed: %d\n", count);
+        System.out.printf("Size: %d\nIsEmpty: %s\n", list.size(), list.isEmpty() ? "True" : "False");
     }
 }
