@@ -3,6 +3,9 @@ package prj.utils;
 import java.util.Iterator;
 
 public final class Utils {
+    private Utils() {
+    }
+
     public static <T> void printCollection(Iterable<T> collection) {
         printCollection(collection, "Collection: [", "]\n", ", ");
     }
