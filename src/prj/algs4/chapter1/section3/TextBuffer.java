@@ -1,6 +1,8 @@
 /* 1.3.44 Text editor buffer. Develop a data type for a buffer in a text editor that imple-
 ments the following API: */
 
+package prj.algs4.chapter1.section3;
+
 import java.util.NoSuchElementException;
 
 public class TextBuffer {

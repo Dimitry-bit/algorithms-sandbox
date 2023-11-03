@@ -5,6 +5,9 @@ tasks: insert at the beginning, insert at the end, remove from the beginning, re
 from the end, insert before a given node, insert after a given node, and remove a given
 node. */
 
+package prj.algs4.chapter1.section3;
+
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

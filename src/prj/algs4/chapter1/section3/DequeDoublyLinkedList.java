@@ -1,6 +1,8 @@
 /* Deque. A double-ended queue or deque (pronounced “deck”) is like a stack or
 a queue but supports adding and removing items at both ends. */
 
+package prj.algs4.chapter1.section3;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

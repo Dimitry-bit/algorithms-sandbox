@@ -1,3 +1,5 @@
+package prj.algs4.chapter1.section3;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -11,10 +13,10 @@ public class QueueLinkedList<Item> implements Iterable<Item> {
         Item value;
         Node next;
     }
-    
-    public QueueLinkedList() { 
-       head = tail = null; 
-       N = 0;
+
+    public QueueLinkedList() {
+        head = tail = null;
+        N = 0;
     }
 
     public boolean isEmpty() {

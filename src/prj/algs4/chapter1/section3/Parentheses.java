@@ -2,6 +2,8 @@
 and uses a stack to determine whether its parentheses are properly balanced. For ex-
 ample, your program should print true for [()]{}{[()()]()} and false for [(]). */
 
+package prj.algs4.chapter1.section3;
+
 import java.io.InputStream;
 import java.util.Scanner;
 

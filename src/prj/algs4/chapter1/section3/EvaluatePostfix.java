@@ -1,6 +1,8 @@
 /* 1.3.11 Write a program EvaluatePostfix that takes a postfix expression from standard input, evaluates it, 
 and prints the value. (Piping the output of your program from the previous exercise to this program gives equivalent behavior to Evaluate. */
 
+package prj.algs4.chapter1.section3;
+
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.StringTokenizer;

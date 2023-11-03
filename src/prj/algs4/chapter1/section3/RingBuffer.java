@@ -4,6 +4,8 @@ log files. When the buffer is empty, the consumer waits until data is deposited;
 buffer is full, the producer waits to deposit data. Develop an API for a RingBuffer and
 an implementation that uses an array representation (with circular wrap-around). */
 
+package prj.algs4.chapter1.section3;
+
 import java.util.NoSuchElementException;
 
 public class RingBuffer<Item> {

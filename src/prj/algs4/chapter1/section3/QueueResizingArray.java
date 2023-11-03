@@ -2,6 +2,8 @@
 abstraction with a fixed-size array, and then extend your implementation to use array
 resizing to remove the size restriction. */
 
+package prj.algs4.chapter1.section3;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

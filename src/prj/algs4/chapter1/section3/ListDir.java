@@ -3,6 +3,8 @@ name of a folder as a command-line argument and prints out all of the files cont
 in that folder, with the contents of each folder recursively listed (indented) under that
 folder’s name. */
 
+package prj.algs4.chapter1.section3;
+
 import java.io.File;
 
 public class ListDir {

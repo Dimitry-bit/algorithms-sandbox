@@ -2,6 +2,8 @@
 as a linked list except that no links are null and the value of last.next is first when-
 ever the list is not empty. Keep only one Node instance variable (last). */
 
+package prj.algs4.chapter1.section3;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

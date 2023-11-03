@@ -6,6 +6,8 @@ MoveToFront: it implements the well-known move-to-front strategy, which is usefu
 caching, data compression, and many other applications where items that have been
 recently accessed are more likely to be reaccessed. */
 
+package prj.algs4.chapter1.section3;
+
 import java.util.NoSuchElementException;
 
 // NOTE: Array is a better choice

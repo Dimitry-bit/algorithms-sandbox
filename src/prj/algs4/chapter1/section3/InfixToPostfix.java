@@ -1,6 +1,8 @@
 /* Write a filter InfixToPostfix that converts an arithmetic expression from in-
 fix to postfix. */
 
+package prj.algs4.chapter1.section3;
+
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.StringTokenizer;

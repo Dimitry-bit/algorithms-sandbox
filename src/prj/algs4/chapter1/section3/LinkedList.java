@@ -13,10 +13,12 @@ positive integers, and return 0 if the list is empty. */
 
 /* 1.3.28 Develop a recursive solution to the previous question. */
 
+package prj.algs4.chapter1.section3;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import prj.utils.Utils;
+import prj.utils.*;
 
 public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item> {
     private class Node {
