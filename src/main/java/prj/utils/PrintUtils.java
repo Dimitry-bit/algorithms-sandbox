@@ -7,7 +7,7 @@ public final class PrintUtils {
     }
 
     public static <T> void printCollection(Iterable<T> collection) {
-        printCollection(collection, "Collection: [", "]\n", ", ");
+        printCollection(collection, "[", "]\n", ", ");
     }
 
     public static <T> void printCollection(Iterable<T> collection, String prefix, String suffix, String delimiter) {
