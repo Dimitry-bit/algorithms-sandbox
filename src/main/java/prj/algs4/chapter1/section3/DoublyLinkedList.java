@@ -11,7 +11,7 @@ package prj.algs4.chapter1.section3;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import prj.utils.Utils;
+import prj.utils.PrintUtils;
 
 public class DoublyLinkedList<Item> implements Iterable<Item> {
     private class DoubleNode {
@@ -255,34 +255,34 @@ public class DoublyLinkedList<Item> implements Iterable<Item> {
         DoublyLinkedList<String> list = new DoublyLinkedList<>();
 
         list.insertFront("First");
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
 
         list.insertFront("Front");
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
 
         list.insertBack("Second");
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
 
         list.insertAfter("After(1)", 1);
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
 
         list.insertBefore("Before(1)", 1);
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
 
         System.out.println("\nRemove Tests:\n");
 
         System.out.printf("Remove Front: \"%s\"\n", list.removeFront().toString());
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
 
         System.out.printf("Remove Back: \"%s\"\n", list.removeBack().toString());
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
 
         System.out.println("Remove: \"First\"");
         list.remove("First");
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
 
         list.removeFront();
         list.removeFront();
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
     }
 }

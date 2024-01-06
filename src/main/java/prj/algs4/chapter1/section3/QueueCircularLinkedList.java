@@ -56,7 +56,7 @@ public class QueueCircularLinkedList<Item> implements Iterable<Item> {
         return item;
     }
 
-    public Item peek(Item item) {
+    public Item peek() {
         if (isEmpty()) {
             throw new NoSuchElementException("Queue is empty");
         }
@@ -94,13 +94,13 @@ public class QueueCircularLinkedList<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
-        QueueCircularLinkedList<String> q = new QueueCircularLinkedList();
+        QueueCircularLinkedList<String> q = new QueueCircularLinkedList<>();
 
-        for (int i = 0; i < args.length; ++i) {
-            if (args[i].equals("-")) {
+        for (String arg : args) {
+            if (arg.equals("-")) {
                 System.out.print(q.dequeue() + ' ');
             } else {
-                q.enqueue(args[i]);
+                q.enqueue(arg);
             }
         }
 

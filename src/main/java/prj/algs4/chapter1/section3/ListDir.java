@@ -40,21 +40,24 @@ public class ListDir {
 
         if (fp.isDirectory()) {
             File[] files = fp.listFiles();
-            for (int i = 0; i < files.length; ++i) {
-                File file = files[i];
-                if (file.isHidden() && !showHidden) {
-                    continue;
-                }
 
-                boolean isLastFile = (i == files.length - 1);
-                final String corner = (isLastFile) ? cornerEnd : cornerTeeConnector;
-                q.enqueue(String.format("%s%s%s", corner, dashRepeat, file.getName()));
+            if (files != null) {
+                for (int i = 0; i < files.length; ++i) {
+                    File file = files[i];
+                    if (file.isHidden() && !showHidden) {
+                        continue;
+                    }
 
-                if (file.isDirectory()) {
-                    final String childCorner = (isLastFile) ? " " : cornerConnector;
-                    String[] childFiles = ListFilesRecursive(file.getPath(), depth + 1, showHidden);
-                    for (String str : childFiles) {
-                        q.enqueue(String.format("%s%s%s", childCorner, spaceRepeat, str));
+                    boolean isLastFile = (i == files.length - 1);
+                    final String corner = (isLastFile) ? cornerEnd : cornerTeeConnector;
+                    q.enqueue(String.format("%s%s%s", corner, dashRepeat, file.getName()));
+
+                    if (file.isDirectory()) {
+                        final String childCorner = (isLastFile) ? " " : cornerConnector;
+                        String[] childFiles = ListFilesRecursive(file.getPath(), depth + 1, showHidden);
+                        for (String str : childFiles) {
+                            q.enqueue(String.format("%s%s%s", childCorner, spaceRepeat, str));
+                        }
                     }
                 }
             }

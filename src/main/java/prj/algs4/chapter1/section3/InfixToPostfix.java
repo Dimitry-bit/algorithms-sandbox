@@ -10,33 +10,22 @@ import java.util.StringTokenizer;
 public class InfixToPostfix {
 
     private static int precedence(String operator) {
-        switch (operator) {
-            case "+":
-            case "-":
-                return 1;
-            case "*":
-            case "/":
-                return 2;
-        }
-
-        assert (false);
-        return -1;
+        return switch (operator) {
+            case "+", "-" -> 1;
+            case "*", "/" -> 2;
+            default -> -1;
+        };
     }
 
     private static boolean isOperator(String token) {
-        switch (token) {
-            case "+":
-            case "-":
-            case "*":
-            case "/":
-                return true;
-        }
-
-        return false;
+        return switch (token) {
+            case "+", "-", "*", "/" -> true;
+            default -> false;
+        };
     }
 
     public static String toPostfix(String s) {
-        StackResizingArray<String> opStack = new StackResizingArray<String>();
+        StackResizingArray<String> opStack = new StackResizingArray<>();
         StringTokenizer st = new StringTokenizer(s);
         StringBuilder sb = new StringBuilder();
 
@@ -50,7 +39,7 @@ public class InfixToPostfix {
                     sb.append(pop).append(' ');
                 }
             } else if (isOperator(token)) {
-                while (!opStack.isEmpty() && precedence(token) <= precedence(opStack.peek())) {
+                while (!opStack.isEmpty() && (precedence(token) <= precedence(opStack.peek()))) {
                     sb.append(opStack.pop()).append(' ');
                 }
                 opStack.push(token);
@@ -60,11 +49,15 @@ public class InfixToPostfix {
         }
 
         while (!opStack.isEmpty()) {
-            sb.append(opStack.pop()).append(' ');
+            sb.append(opStack.pop());
+
+            if (!opStack.isEmpty()) {
+                sb.append(' ');
+            }
         }
 
         return sb.toString();
-    };
+    }
 
     private static String readAll(InputStream source) {
         Scanner in = new Scanner(source);

@@ -117,37 +117,4 @@ public class DequeDoublyLinkedList<Item> implements Iterable<Item> {
             throw new UnsupportedOperationException("Remove in loops is not supported!");
         }
     }
-
-    public static void main(String[] args) {
-        DequeDoublyLinkedList<String> deque = new DequeDoublyLinkedList<>();
-
-        deque.pushLeft("First");
-        printDeque(deque);
-
-        deque.pushLeft("Left");
-        printDeque(deque);
-
-        deque.pushRight("Second");
-        printDeque(deque);
-
-        System.out.println("\nRemove Tests:\n");
-
-        System.out.printf("Remove Left: '%s'\n", deque.popLeft().toString());
-        printDeque(deque);
-
-        System.out.printf("Remove Right: '%s'\n", deque.popRight().toString());
-        printDeque(deque);
-
-        deque.popRight();
-        printDeque(deque);
-    }
-
-    private static <T> void printDeque(DequeDoublyLinkedList<T> deque) {
-        System.out.print("Out: ");
-        for (T s : deque) {
-            System.out.printf("%s, ", s.toString());
-        }
-        System.out.printf("\n(Size=%d, IsEmpty=%s)", deque.size(), (deque.isEmpty()) ? "True" : "False");
-        System.out.println();
-    }
 }

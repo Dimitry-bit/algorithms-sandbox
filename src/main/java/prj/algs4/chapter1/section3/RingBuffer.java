@@ -9,12 +9,13 @@ package prj.algs4.chapter1.section3;
 import java.util.NoSuchElementException;
 
 public class RingBuffer<Item> {
-    private Item[] items;
+    private final Item[] items;
     private int head;
     private int tail;
-    private int capacity;
+    private final int capacity;
     private int N;
 
+    @SuppressWarnings("unchecked")
     public RingBuffer(int capacity) {
         if (capacity < 2) {
             throw new IllegalArgumentException();

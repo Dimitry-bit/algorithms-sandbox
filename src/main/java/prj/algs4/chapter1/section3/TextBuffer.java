@@ -6,16 +6,24 @@ package prj.algs4.chapter1.section3;
 import java.util.NoSuchElementException;
 
 public class TextBuffer {
-    private StackLinkedList<Character> leftStack;
-    private StackLinkedList<Character> rightStack;
+    private final StackLinkedList<Character> leftStack;
+    private final StackLinkedList<Character> rightStack;
 
     public TextBuffer() {
         leftStack = new StackLinkedList<>();
         rightStack = new StackLinkedList<>();
     }
 
+    public boolean isEmpty() {
+        return (leftStack.isEmpty() && rightStack.isEmpty());
+    }
+
     public int size() {
         return (leftStack.size() + rightStack.size());
+    }
+
+    public int getPosition() {
+        return leftStack.size();
     }
 
     public void insert(char c) {
@@ -34,8 +42,7 @@ public class TextBuffer {
             throw new NoSuchElementException("Left stack is empty.");
         }
 
-        char c = leftStack.pop();
-        return c;
+        return leftStack.pop();
     }
 
     public void left(int k) {
@@ -65,11 +72,10 @@ public class TextBuffer {
         for (char c : leftStack) {
             s.push(c);
         }
+
         while (!s.isEmpty()) {
             sb.append(s.pop());
         }
-
-        sb.append('|');
 
         for (char c : rightStack) {
             sb.append(c);
@@ -86,14 +92,11 @@ public class TextBuffer {
         TextBuffer tb = new TextBuffer();
 
         for (String argv : args) {
-            if (argv.equals("<")) {
-                tb.left(1);
-            } else if (argv.equals(">")) {
-                tb.right(1);
-            } else if (argv.equals("-")) {
-                tb.delete();
-            } else {
-                tb.insert(argv);
+            switch (argv) {
+                case "<" -> tb.left(1);
+                case ">" -> tb.right(1);
+                case "-" -> tb.delete();
+                default -> tb.insert(argv);
             }
         }
 

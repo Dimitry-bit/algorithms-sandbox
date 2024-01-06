@@ -11,14 +11,15 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.Stopwatch;
 import edu.princeton.cs.algs4.ThreeSum;
+import prj.utils.Point;
 
-public final class ThreeSumDoublingTest {
+public final class ThreeSumDoublingVisualise {
     private static final int MAXIMUM_INTEGER = 1000000;
 
-    private ArrayList<Point> points = new ArrayList<>();
+    private final ArrayList<Point> points = new ArrayList<>();
     private int canvasXScale = 1;
     private int canvasYScale = 1;
-    private double scaleThresholdMultiplier = 0.75;
+    private final double scaleThresholdMultiplier = 0.75;
 
     public double timeTrial(int n) {
         int[] a = new int[n];
@@ -86,7 +87,7 @@ public final class ThreeSumDoublingTest {
     }
 
     private void rescale() {
-        Point p = points.get(points.size() - 1);
+        Point p = points.getLast();
         while (p.x > canvasXScale * scaleThresholdMultiplier) {
             canvasXScale *= 2;
             StdDraw.setXscale(0, canvasXScale);
@@ -99,11 +100,11 @@ public final class ThreeSumDoublingTest {
     }
 
     private boolean canRescale() {
-        if (points.size() == 0) {
+        if (points.isEmpty()) {
             return false;
         }
 
-        Point p = points.get(points.size() - 1);
+        Point p = points.getLast();
         return (p.x > canvasXScale * scaleThresholdMultiplier || p.y > canvasYScale * scaleThresholdMultiplier);
     }
 
@@ -116,8 +117,7 @@ public final class ThreeSumDoublingTest {
     }
 
     public static void main(String[] args) {
-
-        ThreeSumDoublingTest threeSum = new ThreeSumDoublingTest();
+        ThreeSumDoublingVisualise threeSum = new ThreeSumDoublingVisualise();
         for (int n = 2; true; n += n) {
             double time = threeSum.timeTrial(n);
             StdOut.printf("%7d %7.1f\n", n, time);

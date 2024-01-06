@@ -14,6 +14,7 @@ public class QueueResizingArray<Item> implements Iterable<Item> {
     private int head;
     private int tail;
 
+    @SuppressWarnings("unchecked")
     public QueueResizingArray() {
         items = (Item[]) new Object[1];
         N = 0;
@@ -64,6 +65,7 @@ public class QueueResizingArray<Item> implements Iterable<Item> {
         return items[head];
     }
 
+    @SuppressWarnings("unchecked")
     private void resize(int max) {
         Item[] tmp = (Item[]) new Object[max];
         for (int i = 0; i < N; ++i) {
@@ -99,13 +101,13 @@ public class QueueResizingArray<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
-        QueueResizingArray<String> q = new QueueResizingArray<String>();
+        QueueResizingArray<String> q = new QueueResizingArray<>();
 
-        for (int i = 0; i < args.length; ++i) {
-            if (args[i].equals("-")) {
+        for (String arg : args) {
+            if (arg.equals("-")) {
                 System.out.print(q.dequeue() + ' ');
             } else {
-                q.enqueue(args[i]);
+                q.enqueue(arg);
             }
         }
 

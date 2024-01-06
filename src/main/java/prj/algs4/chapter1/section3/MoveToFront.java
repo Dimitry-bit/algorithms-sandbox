@@ -13,22 +13,28 @@ import java.util.NoSuchElementException;
 // NOTE: Array is a better choice
 public final class MoveToFront {
     // NOTE: All printable characters
-    private static final char rangeStart = ' ';
-    private static final char rangeEnd = '~';
+    private static final char rangeStart = 'a';
+    private static final char rangeEnd = 'z';
+
+    private void MoveToFront() {
+    }
 
     public static int[] encode(String src) {
-        DoublyLinkedList<Character> list = new DoublyLinkedList<Character>();
+        DoublyLinkedList<Character> list = new DoublyLinkedList<>();
+        QueueResizingArray<Integer> queue = new QueueResizingArray<>();
+
         for (char c = rangeStart; c <= rangeEnd; c++) {
             list.insertBack(c);
         }
 
-        QueueResizingArray<Integer> queue = new QueueResizingArray<>();
         for (int i = 0; i < src.length(); ++i) {
             char c = src.charAt(i);
             int index = list.find(c);
+
             if (index == -1) {
-                throw new NoSuchElementException();
+                throw new NoSuchElementException("'%c': encoding is not supported".formatted(c));
             }
+
             queue.enqueue(index);
             list.remove(c);
             list.insertFront(c);
@@ -36,8 +42,9 @@ public final class MoveToFront {
 
         int[] output = new int[0];
         if (!queue.isEmpty()) {
-            output = new int[queue.size()];
             int i = 0;
+            output = new int[queue.size()];
+
             while (!queue.isEmpty()) {
                 output[i++] = queue.dequeue();
             }
@@ -47,14 +54,16 @@ public final class MoveToFront {
     }
 
     public static String decode(int[] inputEncoded) {
-        DoublyLinkedList<Character> list = new DoublyLinkedList<Character>();
+        DoublyLinkedList<Character> list = new DoublyLinkedList<>();
+        QueueResizingArray<Character> queue = new QueueResizingArray<>();
+
         for (char c = rangeStart; c <= rangeEnd; c++) {
             list.insertBack(c);
         }
 
-        QueueResizingArray<Character> queue = new QueueResizingArray<>();
         for (int n : inputEncoded) {
             char c = list.removeAt(n);
+
             list.insertFront(c);
             queue.enqueue(c);
         }

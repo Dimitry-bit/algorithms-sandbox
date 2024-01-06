@@ -1,4 +1,4 @@
-/* 1.3.11 Write a program EvaluatePostfix that takes a postfix expression from standard input, evaluates it, 
+/* 1.3.11 Write a program EvaluatePostfix that takes a postfix expression from standard input, evaluates it,
 and prints the value. (Piping the output of your program from the previous exercise to this program gives equivalent behavior to Evaluate. */
 
 package prj.algs4.chapter1.section3;
@@ -11,23 +11,23 @@ public class EvaluatePostfix {
 
     public static double evaluatePostfix(String postfix) {
         StringTokenizer st = new StringTokenizer(postfix);
-        StackResizingArray<Double> operandStack = new StackResizingArray<Double>();
+        StackResizingArray<Double> operandStack = new StackResizingArray<>();
 
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
 
-            if (token.equals("+")) {
-                operandStack.push(operandStack.pop() + operandStack.pop());
-            } else if (token.equals("-")) {
-                double pop = operandStack.pop();
-                operandStack.push(operandStack.pop() - pop);
-            } else if (token.equals("*")) {
-                operandStack.push(operandStack.pop() * operandStack.pop());
-            } else if (token.equals("/")) {
-                double pop = operandStack.pop();
-                operandStack.push(operandStack.pop() / pop);
-            } else {
-                operandStack.push(Double.parseDouble(token));
+            switch (token) {
+                case "+" -> operandStack.push(operandStack.pop() + operandStack.pop());
+                case "-" -> {
+                    double pop = operandStack.pop();
+                    operandStack.push(operandStack.pop() - pop);
+                }
+                case "*" -> operandStack.push(operandStack.pop() * operandStack.pop());
+                case "/" -> {
+                    double pop = operandStack.pop();
+                    operandStack.push(operandStack.pop() / pop);
+                }
+                default -> operandStack.push(Double.parseDouble(token));
             }
         }
 

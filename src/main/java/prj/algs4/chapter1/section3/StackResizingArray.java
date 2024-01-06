@@ -11,6 +11,7 @@ public class StackResizingArray<Item> implements Iterable<Item> {
     private Item[] items;
     private int N;
 
+    @SuppressWarnings("unchecked")
     public StackResizingArray() {
         items = (Item[]) new Object[1];
         N = 0;
@@ -52,6 +53,7 @@ public class StackResizingArray<Item> implements Iterable<Item> {
         return items[N - 1];
     }
 
+    @SuppressWarnings("unchecked")
     private void resize(int max) {
         Item[] tmp = (Item[]) new Object[max];
         System.arraycopy(items, 0, tmp, 0, N);

@@ -1,4 +1,4 @@
-package prj.algs4.chapter1.section4;
+package prj.utils;
 
 public class Point {
     public double x;

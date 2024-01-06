@@ -13,14 +13,14 @@ public class Parentheses {
         switch (c) {
             case '}':
                 return '{';
-            case ')':
-                return '(';
-            case ']':
-                return '[';
             case '{':
                 return '}';
+            case ')':
+                return '(';
             case '(':
                 return ')';
+            case ']':
+                return '[';
             case '[':
                 return ']';
         }
@@ -29,19 +29,22 @@ public class Parentheses {
         return '\0';
     }
 
-    private static boolean isBalanced(String s) {
-        StackResizingArray<Character> stack = new StackResizingArray<Character>();
+    public static boolean isBalanced(String s) {
+        StackResizingArray<Character> stack;
+        stack = new StackResizingArray<>();
+
         for (int i = 0; i < s.length(); ++i) {
             char c = s.charAt(i);
             if (c == '{' || c == '(' || c == '[') {
                 stack.push(c);
             } else if (c == '}' || c == ')' || c == ']') {
-                if (stack.isEmpty() || matchBracket(c) != stack.pop()) {
+                if (stack.isEmpty() || (matchBracket(c) != stack.pop())) {
                     return false;
                 }
             }
         }
-        return true;
+
+        return stack.isEmpty();
     }
 
     private static String readAll(InputStream source) {

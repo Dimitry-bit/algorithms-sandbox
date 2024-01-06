@@ -1,4 +1,4 @@
-package prj.algs4.chapter1.section4;
+package prj.utils;
 
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;

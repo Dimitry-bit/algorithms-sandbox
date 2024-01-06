@@ -1,4 +1,4 @@
-/* 1.3.20 Write a method delete() that takes an int argument k and deletes the kth element 
+/* 1.3.20 Write a method delete() that takes an int argument k and deletes the kth element
 in a linked list, if it exists. */
 
 /* 1.3.21 Write a method find() that takes a linked list and a string key as arguments
@@ -270,28 +270,28 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
         list.insertBack(40);
         list.insertBack(40);
 
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
         System.out.printf("Max: %d\n", list.max());
         System.out.printf("Max Recursive: %d\n", list.maxRecursive());
 
         System.out.println("\nRemove(i=3):");
         list.removeAt(3);
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
         System.out.printf("Size: %d\nIsEmpty: %s\n", list.size(), list.isEmpty() ? "True" : "False");
 
         System.out.println("\nRemove(i=1):");
         list.removeAt(1);
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
         System.out.printf("Size: %d\nIsEmpty: %s\n", list.size(), list.isEmpty() ? "True" : "False");
 
         System.out.println("\nRemove(i=0):");
         list.removeAt(0);
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
         System.out.printf("Size: %d\nIsEmpty: %s\n", list.size(), list.isEmpty() ? "True" : "False");
 
         System.out.println("\nRemove(v=\"40\"):");
         int count = list.remove(40);
-        Utils.printCollection(list);
+        PrintUtils.printCollection(list);
         System.out.printf("Removed: %d\n", count);
         System.out.printf("Size: %d\nIsEmpty: %s\n", list.size(), list.isEmpty() ? "True" : "False");
     }
