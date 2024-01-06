@@ -13,7 +13,7 @@ import edu.princeton.cs.algs4.Stopwatch;
 import edu.princeton.cs.algs4.ThreeSum;
 import prj.utils.Point;
 
-public final class ThreeSumDoublingVisualise {
+public final class ThreeSumDoublingVisualize {
     private static final int MAXIMUM_INTEGER = 1000000;
 
     private final ArrayList<Point> points = new ArrayList<>();
@@ -117,7 +117,7 @@ public final class ThreeSumDoublingVisualise {
     }
 
     public static void main(String[] args) {
-        ThreeSumDoublingVisualise threeSum = new ThreeSumDoublingVisualise();
+        ThreeSumDoublingVisualize threeSum = new ThreeSumDoublingVisualize();
         for (int n = 2; true; n += n) {
             double time = threeSum.timeTrial(n);
             StdOut.printf("%7d %7.1f\n", n, time);
