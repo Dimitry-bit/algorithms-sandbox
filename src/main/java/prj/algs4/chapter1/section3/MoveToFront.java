@@ -16,7 +16,7 @@ public final class MoveToFront {
     private static final char rangeStart = 'a';
     private static final char rangeEnd = 'z';
 
-    private void MoveToFront() {
+    private MoveToFront() {
     }
 
     public static int[] encode(String src) {
