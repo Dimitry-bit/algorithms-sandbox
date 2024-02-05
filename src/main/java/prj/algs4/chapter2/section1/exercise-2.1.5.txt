@@ -1,0 +1,8 @@
+/* 2.1.5 For each of the two conditions in the inner for loop in insertion sort (Algorithm 2.2),
+describe an array of N items where that condition is always false when the loop terminates. */
+
+Condition (j > 0):
+F E D C B A --> Array is reverse ordered.
+
+Condition (less(a[j], a[j-1]):
+A B C D E F --> Array is ordered

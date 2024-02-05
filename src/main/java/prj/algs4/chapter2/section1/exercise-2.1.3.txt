@@ -1,0 +1,5 @@
+/* 2.1.3 Give an example of an array of N items that maximizes the number of times the
+test a[j] < a[min] fails (and, therefore, min gets updated) during the operation of
+selection sort (Algorithm 2.1). */
+
+For Example, in the array D A B C, the element D will be swapped N - 1 times.

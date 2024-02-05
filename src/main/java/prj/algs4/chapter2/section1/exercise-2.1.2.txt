@@ -1,0 +1,5 @@
+/* 2.1.2 What is the maximum number of exchanges involving any particular element
+during selection sort? What is the average number of exchanges involving an element? */
+
+1) Maximum number of exchanges involving any particular element during selection sort is N - 1.
+2) Average number of exchanges involving an element is exactly 2, because there are exactly N exchanges and N items (each exchange involves two items)

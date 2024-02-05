@@ -1,0 +1,4 @@
+/* 2.1.7 Which method runs faster for an array in reverse order, selection sort or insertion sort? */
+
+Selection sort, because even though both selection sort and insertion sort will run in quadratic time, selection
+sort will only make N exchanges, while insertion sort will make (N^2)/2 exchanges.

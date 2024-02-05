@@ -1,0 +1,7 @@
+/* 2.1.10 Why not use selection sort for h-sorting in shellsort? */
+
+1) Insertion sort is faster than selection sort because as "h" decreases, the array becomes partially sorted.
+2) Insertion sort makes less comparisons in partially sorted arrays than selection sort.
+3) When h-sorting, eventually h will have an increment value of 1, so using a selection sort with an increment value
+    of 1 would be same as using the standard selection sort algorithm from the beginning. This would make the steps with
+    the previous increments unnecessary work.

@@ -1,0 +1,5 @@
+/* 2.1.6 Which method runs faster for an array with all keys identical, selection sort or
+insertion sort? */
+
+Insertion sort will be faster, because it only makes one comparison with the previous element and won't exchange
+any elements, running in linear time. Selection sort will exchange each element with itself and will run in quadratic time.
