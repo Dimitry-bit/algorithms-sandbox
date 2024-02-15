@@ -15,6 +15,10 @@ public class InsertionSortSentinel {
     }
 
     public static void sort(Comparable[] a) {
+        if (a.length == 0) {
+            return;
+        }
+
         int N = a.length;
 
         // Put smallest element in the 0 position

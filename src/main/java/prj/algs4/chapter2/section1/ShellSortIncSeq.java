@@ -13,8 +13,13 @@ public class ShellSortIncSeq {
     }
 
     public static void sort(Comparable[] a) {
+        if (a.length <= 1) {
+            return;
+        }
+
         int N = a.length;
-        int[] seq = new int[N / 3];
+        int seqN = Math.ceilDiv(N, 3);
+        int[] seq = new int[seqN];
 
         seq[0] = 1;
         for (int i = 1; i < seq.length; i++) {

@@ -15,6 +15,7 @@ public class ShellSortInqSeqTest {
         Assertions.assertArrayEquals(expected, src);
     }
 
+    @Test
     public void shellSortInqSeq_sortOneElement_sort() {
         Integer[] src = { 1 };
 
@@ -24,6 +25,7 @@ public class ShellSortInqSeqTest {
         Assertions.assertArrayEquals(expected, src);
     }
 
+    @Test
     public void shellSortInqSeq_duplicateKeys_sort() {
         Integer[] src = { 1, 1, 1 };
 
@@ -33,6 +35,7 @@ public class ShellSortInqSeqTest {
         Assertions.assertArrayEquals(expected, src);
     }
 
+    @Test
     public void shellSortInqSeq_emptyArray_sort() {
         Integer[] src = {};
 
