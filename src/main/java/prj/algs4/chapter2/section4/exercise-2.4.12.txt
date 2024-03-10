@@ -1,0 +1,7 @@
+2.4.12 Suppose that your application will have a huge number of find the maximum
+operations, but a relatively small number of insert and remove the maximum operations.
+Which priority-queue implementation do you think would be most effective: heap,
+unordered array, or ordered array?
+
+The most effective implementation would be ordered array, because find the maximum is a constant time operation, while it's O(log n) for heap,
+and O(N) for unordered arrays

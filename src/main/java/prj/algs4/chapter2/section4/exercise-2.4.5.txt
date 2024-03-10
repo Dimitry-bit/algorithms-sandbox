@@ -1,0 +1,124 @@
+2.4.5 Give the heap that results when the keys E A S Y Q U E S T I O N are inserted
+in that order into an initially empty max-oriented heap.
+
+1) index: 0 1
+   array: - E
+   Tree Structure:
+
+           E
+
+2) index: 0 1 2
+   array: - E A
+   Tree Structure:
+
+           E
+          /
+         A
+
+3) index: 0 1 2 3
+   array: - S A E
+   Tree Structure:
+
+           S
+          / \
+         A   E
+
+4) index: 0 1 2 3 4
+   array: - Y S E A
+   Tree Structure:
+
+           Y
+          / \
+         S   E
+        /
+       A
+
+5) index: 0 1 2 3 4 5
+   array: - Y S E A Q
+   Tree Structure:
+
+           Y
+          / \
+         S   E
+        / \
+       A   Q
+
+6) index: 0 1 2 3 4 5 6
+   array: - Y S U A Q E
+   Tree Structure:
+
+           Y
+        /     \
+       S       U
+      / \     /
+     A   Q   E
+
+7) index: 0 1 2 3 4 5 6 7
+   array: - Y S U A Q E E
+   Tree Structure:
+
+           Y
+        /     \
+       S       U
+      / \     / \
+     A   Q   E   E
+
+8) index: 0 1 2 3 4 5 6 7 8
+   array: - Y S U S Q E E A
+   Tree Structure:
+
+           Y
+        /     \
+       S       U
+      / \     / \
+     S   Q   E   E
+    /
+   A
+
+9) index: 0 1 2 3 4 5 6 7 8 9
+   array: - Y T U S Q E E A S
+   Tree Structure:
+
+           Y
+        /     \
+       T       U
+      / \     / \
+     S   Q   E   E
+    / \
+   A   S
+
+10) index: 0 1 2 3 4 5 6 7 8 9 10
+    array: - Y T U S Q E E A S I
+    Tree Structure:
+
+              Y
+         /        \
+        T          U
+     /     \      / \
+    S       Q    E   E
+   / \     /
+  A   S   I
+
+11) index: 0 1 2 3 4 5 6 7 8 9 10 11
+    array: - Y T U S Q E E A S I  O
+    Tree Structure:
+
+              Y
+         /        \
+        T          U
+     /     \      / \
+    S       Q    E   E
+   / \     / \
+  A   S   I   O
+
+12) index: 0 1 2 3 4 5 6 7 8 9 10 11 12
+    array: - Y T U S Q N E A S I  O  E
+    Tree Structure:
+
+               Y
+         /          \
+        T            U
+     /     \        / \
+    S       Q      N   E
+   / \     / \    /
+  A   S   I   O  E

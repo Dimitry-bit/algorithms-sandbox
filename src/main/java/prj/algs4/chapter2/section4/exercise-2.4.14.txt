@@ -1,0 +1,24 @@
+2.4.14 What is the minimum number of items that must be exchanged during a re-
+move the maximum operation in a heap of size N with no duplicate keys? Give a heap
+of size 15 for which the minimum is achieved. Answer the same questions for two and
+three successive remove the maximum operations.
+
+1) The minimum number of exchanges is 1, and one exchange will involve 2 items.
+
+    3
+   / \
+  1   2
+
+2) It gets more complicated when the heap is of size 15. For 'n > 3' you will need to swaps '84, 100', '99, 84', 
+   that's 2 swaps each involving 2 items, so in total 4 items.
+
+                 100
+         /                   \
+        99                   90
+     /     \              /      \
+    9       8            89      88
+   / \     / \          /  \    /  \
+  7   6   5   4        87  86  85  84
+
+
+Reference: https://stackoverflow.com/questions/31235003/what-is-the-minimum-number-of-items-that-must-be-exchanged-during-a-remove-the-m

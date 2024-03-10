@@ -1,0 +1,5 @@
+2.4.2 Criticize the following idea: To implement find the maximum in constant time,
+why not use a stack or a queue, but keep track of the maximum value inserted so far,
+then return that value for find the maximum?
+
+This will keep track of the current maximum only. After a call to remove maximum, it will not be possible to find the next maximum in constant time.

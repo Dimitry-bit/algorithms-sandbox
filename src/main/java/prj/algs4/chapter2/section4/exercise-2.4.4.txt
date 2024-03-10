@@ -1,0 +1,13 @@
+2.4.4 Is an array that is sorted in decreasing order a max-oriented heap?
+
+Yes, an array that is sorted in decreasing order is a max-oriented heap.
+
+Example:
+array:  5 4 3 2 1
+Tree structure:
+
+          5
+        /   \
+       4     3
+     /   \
+    3     1
