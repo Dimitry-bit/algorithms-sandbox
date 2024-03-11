@@ -1,0 +1,4 @@
+2.5.1 Consider the following implementation of the compareTo() method for String.
+How does the third line help with efficiency?
+
+Yes, because if compare the string to itself we skip the loop entirely.
