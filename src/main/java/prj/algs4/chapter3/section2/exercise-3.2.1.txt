@@ -1,0 +1,107 @@
+3.2.1 Draw the BST that results when you insert the keys E A S Y Q U E S T I O N,
+in that order (associating the value i with the ith key, as per the convention in the text)
+into an initially empty tree. How many compares are needed to build the tree?
+
+E 0     E
+0 Compare
+
+A 1     E
+       /
+      A
+1 Compare
+
+
+S 2     E
+       / \
+      A   S
+1 Compare
+
+Y 3     E
+       / \
+      A   S
+           \
+            Y
+2 Compare
+
+Q 4     E
+       / \
+       A  S
+         / \
+        Q   Y
+2 Compare
+
+U 5     E
+       / \
+      A   S
+         / \
+        Q   Y
+           /
+          U
+3 Compare
+
+E 6     E
+       / \
+      A   S
+         / \
+        Q   Y
+           /
+          U
+1 Compare
+
+S 7     E
+       / \
+      A   S
+         / \
+        Q   Y
+           /
+          U
+2 Compare
+
+T 8     E
+       / \
+      A   S
+         / \
+        Q   Y
+           /
+          U
+         /
+        T
+4 Compare
+
+I 9     E
+       / \
+      A   S
+         / \
+        Q   Y
+       /   /
+      I   U
+         /
+        T
+3 Compare
+
+O 10     E
+       /  \
+      A    S
+         /   \
+        Q     Y
+       /     /
+      I     U
+       \   /
+        O T
+4 Compare
+
+N 11     E
+       /  \
+      A    S
+         /   \
+        Q     Y
+       /     /
+      I     U
+       \   /
+        O T
+       /
+      N
+5 Compare
+
+
+Total number of compares to build the tree: 28

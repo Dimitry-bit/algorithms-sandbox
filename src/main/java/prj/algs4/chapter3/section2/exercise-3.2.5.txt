@@ -1,0 +1,8 @@
+3.2.5 Suppose that we have an estimate ahead of time of how often search keys are
+to be accessed in a BST, and the freedom to insert them in any order that we desire.
+Should the keys be inserted into the tree in increasing order, decreasing order of likely
+frequency of access, or some other order? Explain your answer.
+
+Neither inserting the keys in increasing or decreasing order of likely frequency of access will be the optimal approach.
+
+Reference: https://en.wikipedia.org/wiki/Optimal_binary_search_tree
